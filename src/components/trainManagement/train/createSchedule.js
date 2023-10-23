@@ -181,6 +181,7 @@ export default class createSchedule extends Component {
     .then(({ data }) => {
       console.log("train", data);
       this.props.callMainTrainFunction();
+      window.location.reload();
     })
     .catch((err) => {
       console.log(err)

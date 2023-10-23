@@ -72,7 +72,7 @@ class ControlPanel extends Component {
     // const { train_id } = this.props;
 
     return (
-      <Box sx={{ width: "300px", maxWidth: 360, bgcolor: "background.paper" }}>
+      <Box sx={{ width: "350px", maxWidth: 360, bgcolor: "background.paper" }}>
         <Box sx={{ my: 3, mx: 2 }}>
           <Grid container alignItems="center">
             <Grid item xs>
@@ -90,7 +90,7 @@ class ControlPanel extends Component {
                 {this.props.IsCancled ? (
                   <Chip color="warning" label="CANCELED" />
                 ) : (
-                  <Chip color="success" label="PUBLISHED" />
+                  <Chip color="success" label="NOT CANCLED" />
                 )}
               </Typography>
             </Grid>
@@ -119,7 +119,7 @@ class ControlPanel extends Component {
             ) : (
               <Chip
                 color="success"
-                label="PUBLISHED"
+                label="NOT CANCLED"
                 style={{ float: "right" }}
               />
             )}

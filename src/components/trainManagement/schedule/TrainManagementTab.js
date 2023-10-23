@@ -119,7 +119,7 @@ export default class TrainManagementTab extends Component {
     return (
       <div style={{ margin: "5px" }}>
         <TableContainer>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 700 }} aria-label="simple table">
             <TableHead>
               <TableRow>
               <TableCell align="right">Train Number</TableCell>
@@ -143,10 +143,10 @@ export default class TrainManagementTab extends Component {
                         key={index}
                         label={`${classItem.className} - Seats: ${classItem.seatCount}`}
                         color="primary" variant="outlined"
-                        style={{ margin: "5px",marginTop: '15px',width: '150px' }}
+                        style={{ margin: "1px",marginTop: '15px',width: '150px' }}
                       />
                     ))}</TableCell>
-                    <TableCell component="th" scope="row">
+                    <TableCell component="td" scope="row">
                     {row.status ? (
                   <Chip color="success" label="ACTIVE" style={{width: '100px'}} />
                 ) : (
@@ -155,16 +155,11 @@ export default class TrainManagementTab extends Component {
                   </TableCell>
                   <TableCell align="right">
                     <div>
-                      {/* <Button
-                        variant="outlined"
-                        startIcon={<EditIcon />}
-                        style={{marginRight: '5px'}}
-                      ></Button> */}
                       <Button
                         variant="outlined"
                         startIcon={<RemoveRedEyeIcon />}
                         onClick={()=> this.handleScheduleDialogOpen(row.trainNo)}
-                        style={{marginRight: '5px'}}
+                        style={{marginBottom: '2px'}}
                       ></Button>
                       <Button
                         variant="outlined"

@@ -98,20 +98,20 @@ export default class createTrain extends Component {
     const data = {
       name: this.state.name,
       trainNo: this.state.trainNo,
-      firstClassSeatNo: this.state.firstClassSeatNo,
-      secondClassSeatNo: this.state.secondClassSeatNo,
       classes: this.state.stationsArray.slice(1),
+      status: true,
     };
     console.log("data: ", data);
     createNewTrain(data)
       .then(({ data }) => {
         console.log("train", data);
+        this.handleDialogClose();
+        this.props.handleScheduleDialogOpen();
       })
       .catch((err) => {
         console.log(err);
       });
-    this.handleDialogClose();
-    this.props.handleScheduleDialogOpen();
+    
   };
   render() {
     return (

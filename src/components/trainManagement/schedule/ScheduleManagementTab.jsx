@@ -480,7 +480,7 @@ export default class ScheduleManagementTab extends Component {
                 </div>
               </div>
             ))}
-            <Button type="submit" color="primary">
+            <Button type="submit" color="primary" variant="contained">
               Submit
             </Button>
             <Button onClick={this.handleDialogClose} color="primary">
@@ -521,7 +521,7 @@ export default class ScheduleManagementTab extends Component {
                 {/* ,pointerEvents: this.state.resevation.isStatusChanged ? '': 'none' */}
                 <Paper elevation={3}
                         style={{
-                          textAlign: "center", width: '300px', padding: '1px', marginBottom: '30px'
+                          textAlign: "center", width: '350px', padding: '1px', marginBottom: '30px'
                         }}><ControlSchedulePanel scheduleId={scheduleId} isPublished={isPublished} fetchSchedules={this.fetchSchedules}/></Paper>
                 </div>
                 </div>
@@ -529,7 +529,7 @@ export default class ScheduleManagementTab extends Component {
                 {/* ,pointerEvents: this.state.resevation.isStatusChanged ? '': 'none' */}
                 <Paper elevation={3}
                         style={{
-                          textAlign: "center", width: '300px', padding: '1px'
+                          textAlign: "center", width: '350px', padding: '1px'
                         }}><ControlPanel scheduleId={scheduleId} IsCancled={IsCancled} fetchSchedules={this.fetchSchedules}/></Paper>
                 </div>
               </div>

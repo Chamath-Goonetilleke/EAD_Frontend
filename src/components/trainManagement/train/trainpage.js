@@ -109,14 +109,15 @@ export default class TrainPage extends Component {
           
           <div style={{float: 'right', marginRight: '30px'}}>
           <Button
-            variant="outlined"
+            variant="contained"
             color="primary"
             onClick={this.handleDialogOpen}
+            style={{marginRight: '2px'}}
           >
             Create Train
           </Button>
           <Button
-            variant="outlined"
+            variant="contained"
             color="primary"
             onClick={this.handleScheduleDialogOpen}
           >

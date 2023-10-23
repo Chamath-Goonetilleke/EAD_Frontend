@@ -78,7 +78,7 @@ class ControlSchedulePanel extends Component {
     
 
     return (
-      <Box sx={{ width: "300px", maxWidth: 360, bgcolor: "background.paper" }}>
+      <Box sx={{ width: "350px", maxWidth: 360, bgcolor: "background.paper" }}>
         <Box sx={{ my: 3, mx: 2 }}>
           <Grid container alignItems="center">
             <Grid item xs>
