@@ -12,24 +12,26 @@ import MuiAlert from "@mui/material/Alert";
 import { updateResevationScheduleTrainStatus, updateNewScheduleTrainStatus } from "../../../services/scheduleService";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
+// import MuiAlert from '@mui/material/Alert';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 class ControlPanel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: props.status,
-      train_id: props.train_id,
-      isAlertMsg: false,
-      alertseverity: "success",
-      scheduleId: props.scheduleId,
-      status: props.status,
-      open: false,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+    
+  // }
+  state = {
+    checked: this.props.IsCancled,
+    train_id: this.props.train_id,
+    isAlertMsg: false,
+    alertseverity: "success",
+    scheduleId: this.props.scheduleId,
+    status: this.props.IsCancled,
+    open: false,
+  };
   handleAlertClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -44,18 +46,19 @@ class ControlPanel extends Component {
   //   warning
   updateTrainReservation = async () => {
     try {
-      const { data } = await updateNewScheduleTrainStatus(
+      const { data } = await updateResevationScheduleTrainStatus(
         this.props.scheduleId,
         this.state.checked
-      );
-      this.setState({ train_status: this.state.checked });
-      console.log("oooooooooooooooooooo",data);
-
-      console.log("this.state.schedulessssss", this.state.scheduleId);
-
+      );console.log("data>>>>>>>>>>>>>>>",data)
+      // this.setState({ open: data });
       // this.props.handleControlPanelDialogClose();
+      console.log(data)
+      this.props.fetchSchedules();
     } catch (error) {
       // Handle error if needed
+      this.setState({ open: true });
+      this.setState({checked: this.props.isPublished})
+      console.log("data>>>>>>>>>>>>>>>",error.request.status)
       console.log(error);
     }
   };
@@ -84,10 +87,10 @@ class ControlPanel extends Component {
             </Grid>
             <Grid item>
               <Typography gutterBottom variant="h6" component="div">
-                {this.props.status ? (
-                  <Chip color="success" label="PUBLISHED" />
-                ) : (
+                {this.props.IsCancled ? (
                   <Chip color="warning" label="CANCELED" />
+                ) : (
+                  <Chip color="success" label="PUBLISHED" />
                 )}
               </Typography>
             </Grid>
@@ -96,6 +99,8 @@ class ControlPanel extends Component {
             Update trains for reservations
           </Typography> */}
         </Box>
+        {this.state.open ? <Alert severity="warning">Current Schedule have Reservation</Alert> : ""}
+        
         <Divider variant="middle" />
         <Box sx={{ m: 2 }}>
           <Typography gutterBottom variant="body1">
@@ -107,14 +112,14 @@ class ControlPanel extends Component {
             />
             {checked ? (
               <Chip
-                color="success"
-                label="PUBLISHED"
-                style={{ float: "right" }}
-              />
+              color="warning"
+              label="CANCELED"
+              style={{ float: "right" }}
+            />
             ) : (
               <Chip
-                color="warning"
-                label="CANCELED"
+                color="success"
+                label="PUBLISHED"
                 style={{ float: "right" }}
               />
             )}
@@ -139,14 +144,14 @@ class ControlPanel extends Component {
             Successfully Created!
           </Alert>
         </Snackbar>
-        <Dialog
+        {/* <Dialog
             open={this.state.open}
             onClose={this.handleDialogClose}
             keepMounted
             aria-describedby="alert-dialog-slide-description"
           >
             <DialogTitle>Cannot Cancled Train. You have Resevations</DialogTitle>
-          </Dialog>
+          </Dialog> */}
       </Box>
     );
   }

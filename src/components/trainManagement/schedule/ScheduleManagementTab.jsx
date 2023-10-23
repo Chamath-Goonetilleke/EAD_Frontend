@@ -36,64 +36,67 @@ const MenuProps = {
   },
 };
 export default class ScheduleManagementTab extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      trainNo: 0,
-      tabValue: 2,
-      schedules: {},
-      name: "",
-      trainNo: 0,
-      open: false,
-      startTime: "",
-      startStation: "",
-      endTime: "",
-      endStation: "",
-      weekType: "",
-      trainNumbers: ["123", "456", "789"],
-      weekOrWeekend: ["Weekday", "Weekend"],
-      newStartStation: "",
-      newEndStation: "",
-      stationsArray: [
-        {
-          newStartStation: "",
-          newEndStation: "",
-          newStartTime: "",
-          newEndTime: "",
-          distance: 0,
-        },
-      ],
-      newRecord: {
+  // constructor(props) {
+  //   super(props);
+  //   this.
+  // }
+  state = {
+    name: "",
+    trainNo: 0,
+    isPublished: false,
+    IsCancled: false,
+    tabValue: 2,
+    schedules: {},
+    name: "",
+    trainNo: 0,
+    open: false,
+    startTime: "",
+    startStation: "",
+    endTime: "",
+    endStation: "",
+    weekType: "",
+    trainNumbers: ["123", "456", "789"],
+    weekOrWeekend: ["Weekday", "Weekend"],
+    newStartStation: "",
+    newEndStation: "",
+    stationsArray: [
+      {
         newStartStation: "",
         newEndStation: "",
         newStartTime: "",
         newEndTime: "",
         distance: 0,
       },
-      trainObject: null,
-      trainList: [],
-      dailytypes: [],
-      names: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-      trainNo: this.props.trainNo,
-      scheduleId: "",
-      status: 0,
-      isAlertMsg: false,
-      resevation: {
-        resevationCount: 0,
-        totalPrice: 0,
-        isStatusChanged: false
-      },
-    };
-  }
+    ],
+    newRecord: {
+      newStartStation: "",
+      newEndStation: "",
+      newStartTime: "",
+      newEndTime: "",
+      distance: 0,
+    },
+    trainObject: null,
+    trainList: [],
+    dailytypes: [],
+    names: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
+    trainNo: this.props.trainNo,
+    scheduleId: "",
+    isAlertMsg: false,
+    resevation: {
+      resevationCount: 0,
+      totalPrice: 0,
+      isStatusChanged: false
+    },
+    
+  };
   handleAlertClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -176,10 +179,16 @@ export default class ScheduleManagementTab extends Component {
         stationsArray: data.stations,
         scheduleId: data.id,
         trainObject: data.train,
-        status: data.isPublished,
+        isPublished: data.isPublished,
+        IsCancled: data.isCancled
       });
-      console.log("this.state.schedulesss123", this.state.scheduleId);
-      console.log("this.state.schedulesss123", this.state.status);
+      this.setState({endTime: data.endTime})
+      console.log("this.state.trainNo", this.state.trainNo);
+      console.log("this.state.scheduleId", this.state.scheduleId);
+      console.log("this.state.isPublished", this.state.isPublished);
+      console.log("this.state.IsCancled", this.state.IsCancled);
+      console.log("this.state.endTime", this.state.endTime);
+      console.log("this.state.startStation", this.state.startStation);
     } catch (error) {
       // Handle error if needed
       console.log(error);
@@ -203,7 +212,7 @@ export default class ScheduleManagementTab extends Component {
       endTime: this.state.endTime,
       stations: this.state.stationsArray,
       train: this.state.trainObject,
-      Status: 0,
+      isPublished: 0,
     };
     console.log("data::::: ", data);
     updateTrainSchedule(this.state.scheduleId, data)
@@ -226,9 +235,12 @@ export default class ScheduleManagementTab extends Component {
   };
   render() {
     const { train_id } = this.props;
+    const {isPublished, IsCancled, scheduleId, endStation} = this.state;
+    
     return (
       <div style={{ margin: "80px" }}>
         <div>
+        
           <form onSubmit={this.handleSubmit}>
             <div>
               <Grid container spacing={2}>
@@ -510,7 +522,7 @@ export default class ScheduleManagementTab extends Component {
                 <Paper elevation={3}
                         style={{
                           textAlign: "center", width: '300px', padding: '1px', marginBottom: '30px'
-                        }}><ControlSchedulePanel scheduleId={this.state.scheduleId} status={this.state.status} fetchSchedules={this.fetchSchedules}/></Paper>
+                        }}><ControlSchedulePanel scheduleId={scheduleId} isPublished={isPublished} fetchSchedules={this.fetchSchedules}/></Paper>
                 </div>
                 </div>
                 <div style={{margin: '0px'}}>
@@ -518,7 +530,7 @@ export default class ScheduleManagementTab extends Component {
                 <Paper elevation={3}
                         style={{
                           textAlign: "center", width: '300px', padding: '1px'
-                        }}><ControlPanel scheduleId={this.state.scheduleId} status={this.state.status} handleControlPanelDialogClose={this.handleControlPanelDialogClose}/></Paper>
+                        }}><ControlPanel scheduleId={scheduleId} IsCancled={IsCancled} fetchSchedules={this.fetchSchedules}/></Paper>
                 </div>
               </div>
             </div>

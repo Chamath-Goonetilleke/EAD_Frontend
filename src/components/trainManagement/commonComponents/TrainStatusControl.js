@@ -62,6 +62,7 @@ class TrainStatusControl extends Component {
       const { data } = await updateTrainStatus(this.state.train_id, this.state.checked);
       
       console.log("this.state.schedules", this.state.schedules);
+      window.location.reload();
       
       this.props.handleControlPanelDialogClose();
     } catch (error) {

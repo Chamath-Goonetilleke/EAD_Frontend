@@ -21,7 +21,7 @@ export async function updateScheduleTrainSchedule(id, data) {
     return await http.post(endpoint + "/update-schedule/"+id, data);
 }
 export async function updateTrainStatus(id, status) {
-    return await http.patch(endpoint + "/update-schedules-status/"+id+"/"+status);
+    return await http.patch(endpoint + "/update-train-status/"+id+"/"+status);
 }
 export async function updateResevationScheduleTrainStatus(id, IsCancled) {
     return await http.patch(endpoint + "/update-schedules-status-cancled/"+id+"/"+IsCancled);
