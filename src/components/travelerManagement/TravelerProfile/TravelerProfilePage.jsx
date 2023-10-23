@@ -6,7 +6,7 @@ displays and manages the traveler's profile and related functionalities.
 Author: IT20122096
 Date: 2023-10-13
 ------------------------------------------------------------------------------
-*/ 
+*/
 import { Avatar, Button, Chip, Fab } from "@mui/material";
 import React, { Component } from "react";
 import EditIcon from "@mui/icons-material/Edit";
@@ -18,6 +18,7 @@ import {
   deActivateAccount,
   deleteTraveler,
   getTraveler,
+  travelerProfileImageUpload,
   updateTraveler,
 } from "../../../services/travelerService";
 import TravelerFunctions from "./TravelerFunctions";
@@ -27,6 +28,7 @@ export default class TravelerProfilePage extends Component {
     traveler: null,
     role: null,
     avatarImage: null,
+    imageFile: null,
     isEnabled: false,
     deleteDialogOpen: false,
     deleteMessage: {
@@ -46,6 +48,7 @@ export default class TravelerProfilePage extends Component {
 
   handleImageChange = (event) => {
     const file = event.target.files[0];
+    this.setState({ imageFile: file });
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -61,12 +64,12 @@ export default class TravelerProfilePage extends Component {
 
   handleSaveImage = async () => {
     const newTraveler = { ...this.state.traveler };
-    newTraveler.role = this.props.role;
-    newTraveler.imageUrl = this.state.avatarImage;
+    const formData = new FormData();
+    formData.append("file", this.state.imageFile);
 
     this.setState({ isLoading: true });
 
-    await updateTraveler(newTraveler)
+    await travelerProfileImageUpload(formData, newTraveler.nic)
       .then(({ data }) => {
         toast.success(data, { autoClose: 1000 });
         this.setState({ isLoading: false });
@@ -116,7 +119,7 @@ export default class TravelerProfilePage extends Component {
     const nic = this.props.match.params.nic;
     await deleteTraveler(nic)
       .then(({ data }) => {
-        toast.success(data, { autoClose: 1000 });
+        toast.success(data.res, { autoClose: 1000 });
         this.setState({ isLoading: false });
         setTimeout(async () => {
           window.location = "/profile";

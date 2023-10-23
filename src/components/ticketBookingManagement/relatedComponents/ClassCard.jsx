@@ -25,7 +25,7 @@ export default function ClassCard({ className, price, available, onClick }) {
               marginBottom: "5px",
             }}
           >
-            {className}
+            {className} Seats
           </div>
           <Chip
             label={"LKR. " + price + ".00"}

@@ -10,7 +10,7 @@ import { Avatar, Button, Fab } from "@mui/material";
 import React, { Component } from "react";
 import UpdateBackOfficeUser from "./UpdateBackOfficeUser";
 import EditIcon from "@mui/icons-material/Edit";
-import { updateUser } from "../../../services/userService";
+import { imageUpload, updateUser } from "../../../services/userService";
 import { toast } from "react-toastify";
 import UpdateTravelAgent from "./UpdateTravelAgent";
 import UserFunctions from "./UserFunctons";
@@ -18,11 +18,13 @@ import UserFunctions from "./UserFunctons";
 export default class ProfilePage extends Component {
   state = {
     avatarImage: null,
+    imageFile: null,
     isEnabled: false,
   };
 
   handleImageChange = (event) => {
     const file = event.target.files[0];
+    this.setState({imageFile:file})
     if (file) {
       // Read the selected file as a data URL
       const reader = new FileReader();
@@ -36,9 +38,10 @@ export default class ProfilePage extends Component {
 
   handleSaveImage = async () => {
     const { user } = this.props;
-    user.imageUrl = this.state.avatarImage;
+    const formData = new FormData();
+    formData.append("file", this.state.imageFile)
 
-    await updateUser(user)
+    await imageUpload(formData, user.nic)
       .then(({ data }) => {
         toast.success(data, { autoClose: 1000 });
         this.setState({ isLoading: false });

@@ -40,3 +40,10 @@ export async function updateUser(newUser) {
     headers: { Authorization: "Bearer " + token },
   });
 }
+
+export async function imageUpload(formData, nic) {
+  const token = Cookies.get("token");
+  return await http.put(endpoint + `/imageUpload/${nic}`, formData, {
+    headers: { Authorization: "Bearer " + token },
+  });
+}

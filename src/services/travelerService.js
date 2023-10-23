@@ -118,3 +118,11 @@ export async function deActivateAccount(nic) {
     headers: { Authorization: "Bearer " + token },
   });
 }
+
+
+export async function travelerProfileImageUpload(formData, nic) {
+  const token = Cookies.get("token");
+  return await http.put(endpoint + `/imageUpload/${nic}`, formData, {
+    headers: { Authorization: "Bearer " + token },
+  });
+}
