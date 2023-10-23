@@ -24,6 +24,7 @@ import dayjs from "dayjs";
 export default function UpdateReservationDialog({
   open,
   handleClose,
+  onClickUpdate,
   reservation,
   isLoading,
 }) {
@@ -86,7 +87,7 @@ export default function UpdateReservationDialog({
           </div>
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={() => handleClose(date)}>
+          <Button variant="contained" onClick={() => onClickUpdate(date)}>
             <span
               class="spinner-border spinner-border-sm"
               role="status"

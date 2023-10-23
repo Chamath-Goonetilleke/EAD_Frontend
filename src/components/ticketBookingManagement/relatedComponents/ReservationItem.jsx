@@ -54,7 +54,10 @@ export default function ReservationItem({ reservation }) {
   const handleUpdateOpen = () => {
     setOpenUpdate(true);
   };
-  const handleUpdateClose = async (date) => {
+  const handleUpdateClose = ()=>{
+setOpenUpdate(false)
+  }
+  const handleUpdateReservation = async (date) => {
     const res = {
       isCancel: false,
       date: date.format("YYYY-MM-DD"),
@@ -63,7 +66,7 @@ export default function ReservationItem({ reservation }) {
     setIsLoading(true);
     await updateReservation(res)
       .then(({ data }) => {
-        toast.success(data, { autoClose: 1000 });
+        toast.success(data.res, { autoClose: 1000 });
         setIsLoading(false);
         setTimeout(async () => {
           setOpenUpdate(false);
@@ -92,7 +95,7 @@ export default function ReservationItem({ reservation }) {
     };
     await updateReservation(res)
       .then(({ data }) => {
-        toast.success(data, { autoClose: 1000 });
+        toast.success(data.res, { autoClose: 1000 });
         setTimeout(async () => {
           setOpenDelete(false);
           window.location.reload();
@@ -209,6 +212,7 @@ export default function ReservationItem({ reservation }) {
         handleClose={handleUpdateClose}
         reservation={reservation}
         isLoading={isLoading}
+        onClickUpdate={handleUpdateReservation}
       />
       <AlertDialog
         open={openDelete}

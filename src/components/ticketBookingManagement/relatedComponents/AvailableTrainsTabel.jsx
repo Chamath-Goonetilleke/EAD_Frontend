@@ -220,6 +220,7 @@ EnhancedTableToolbar.propTypes = {
 
 const handleRows = (schedules) => {
   const rowList = [];
+  console.log("schedules",schedules)
   schedules.forEach((schedule) => {
     rowList.push(
       createData(
@@ -228,7 +229,7 @@ const handleRows = (schedules) => {
         schedule.arrives,
         schedule.classes.map((cls) => cls.className + " - " + cls.seatCount),
         schedule.classes.map((cls) => cls.availableCount),
-        schedule.classes.map((cls) => schedule.totalDistance * 10),//TODO replace 10 with class price
+        schedule.classes.map((cls) => schedule.totalDistance * cls.price),//TODO replace 10 with class price
         schedule.id
       )
     );

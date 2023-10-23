@@ -52,7 +52,7 @@ export default class ConfirmationAndPayment extends Component {
           {schedule.classes.map((cls) => (
             <ClassCard
               className={cls.className}
-              price={schedule.totalDistance * cls.seatCount}
+              price={schedule.totalDistance * cls.price}
               available={cls.availableCount}
               onClick={this.handleSelectClass}
             />

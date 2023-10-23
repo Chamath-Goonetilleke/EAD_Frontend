@@ -34,6 +34,7 @@ export default class StepperBody extends Component {
   componentDidMount = async () => {
     await getAllSchedules()
       .then(({ data }) => {
+        console.log("trains: " + data)
         this.setState({ schedules: data });
       })
       .catch((err) => console.log(err));

@@ -19,6 +19,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Ticket from "./Ticket";
 
 export default function ViewMoreDialog({ open, handleClose, reservation }) {
   return (
@@ -54,6 +55,10 @@ export default function ViewMoreDialog({ open, handleClose, reservation }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
+                  <TableRow>
+                    <TableCell>Reference ID</TableCell>
+                    <TableCell>{reservation.id}</TableCell>
+                  </TableRow>
                   <TableRow>
                     <TableCell>Train No & Name </TableCell>
                     <TableCell>
@@ -95,6 +100,9 @@ export default function ViewMoreDialog({ open, handleClose, reservation }) {
                 </TableBody>
               </Table>
             </TableContainer>
+          </div>
+          <div style={{ display: "flex", maxWidth: "100%", overflow: "auto" }}>
+            {reservation.tickets.map((ticket, index)=> <Ticket ticket={ticket} />)}
           </div>
         </DialogContent>
       </Dialog>

@@ -71,13 +71,12 @@ export default class TravelerProfilePage extends Component {
         toast.success(data, { autoClose: 1000 });
         this.setState({ isLoading: false });
         setTimeout(async () => {
-          window.location = "/profile";
+          window.location.reload();
         }, 2000);
       })
       .catch((err) => {
         toast.error(err.response.data);
         this.setState({ isLoading: false });
-        this.onReset();
       });
   };
 
@@ -88,13 +87,12 @@ export default class TravelerProfilePage extends Component {
         toast.success(data, { autoClose: 1000 });
         this.setState({ isLoading: false });
         setTimeout(async () => {
-          window.location = "/profile";
+          window.location.reload();
         }, 2000);
       })
       .catch((err) => {
         toast.error(err.response.data);
         this.setState({ isLoading: false });
-        this.onReset();
       });
   };
 
@@ -102,16 +100,15 @@ export default class TravelerProfilePage extends Component {
     const nic = this.props.match.params.nic;
     await deActivateAccount(nic)
       .then(({ data }) => {
-        toast.success(data, { autoClose: 1000 });
+        toast.success(data.res, { autoClose: 1000 });
         this.setState({ isLoading: false });
         setTimeout(async () => {
-          window.location = "/profile";
+          window.location.reload();
         }, 2000);
       })
       .catch((err) => {
         toast.error(err.response.data);
         this.setState({ isLoading: false });
-        this.onReset();
       });
   };
 
@@ -128,7 +125,6 @@ export default class TravelerProfilePage extends Component {
       .catch((err) => {
         toast.error(err.response.data);
         this.setState({ isLoading: false });
-        this.onReset();
       });
   };
 
