@@ -23,7 +23,7 @@ class ControlSchedulePanel extends Component {
     
   // }
   state = {
-    checked: this.props.isPublished,
+    checked: true,
     scheduleId: this.props.scheduleId,
     isAlertMsg: false,
     alertseverity: "success",
@@ -37,7 +37,7 @@ class ControlSchedulePanel extends Component {
     this.setState({ isAlertMsg: false });
   };
   componentDidMount = () => {
-    this.setState({checked: this.props.isPublished})
+    // this.setState({checked: this.props.isPublished})
   };
 
   handleChange = (event) => {

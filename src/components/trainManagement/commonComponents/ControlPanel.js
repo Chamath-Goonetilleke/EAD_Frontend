@@ -82,7 +82,7 @@ class ControlPanel extends Component {
                 component="div"
                 style={{ textAlign: "left" }}
               >
-                Current Status
+                Train Reservation Status
               </Typography>
             </Grid>
             <Grid item>
